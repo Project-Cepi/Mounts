@@ -29,6 +29,8 @@ object MountHook {
         spawnHook(event.player, event.position.add(.0, 1.0, .0))
 
     private fun hookInteract(event: PlayerEntityInteractEvent) {
+        if (event.target.hasPassenger()) return
+
         event.target.addPassenger(event.player)
 
         playerVehicleNode.listen<PlayerPacketEvent> {
