@@ -50,6 +50,7 @@ object MountHook {
                     vehicle.velocity = vehicle.velocity.add(.0, 1.0, 0.0)
                 }
 
+                vehicle.setView(player.position.yaw(), 0f)
                 vehicle.velocity = vehicle.velocity.add(player.position.direction().normalize().mul(steerPacket.forward.toDouble()).withY(.0))
 
             }
