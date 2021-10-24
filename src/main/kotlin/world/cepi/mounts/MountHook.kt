@@ -32,12 +32,12 @@ object MountHook {
         event.target.addPassenger(event.player)
 
         playerVehicleNode.listen<PlayerPacketEvent> {
+            val vehicleUUID = event.player.vehicle!!.uuid
             removeWhen {
-                player.vehicle == null
+                player.vehicle?.uuid != vehicleUUID || player.isRemoved
             }
+            filters += { packet is ClientSteerVehiclePacket }
             handler {
-                if (packet !is ClientSteerVehiclePacket) return@handler
-
                 val steerPacket = packet as ClientSteerVehiclePacket
                 val vehicle = player.vehicle!!
 
