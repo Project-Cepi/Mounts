@@ -7,7 +7,7 @@ class MountsExtension : Extension() {
 
     override fun initialize() {
         eventNode.listenOnly(MountHook::hookUseOnBlock)
-        eventNode.addChild(MountHook.playerDisconnectNode)
+        eventNode.addChild(MountHook.playerVehicleNode)
         MountCommand.register()
 
         logger.info("[Mounts] has been enabled!")
