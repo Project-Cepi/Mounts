@@ -49,7 +49,7 @@ object MountHook {
                 }
 
                 if (steerPacket.flags and 0x01 == 0x01.toByte() && vehicle.isOnGround) {
-                    vehicle.velocity = vehicle.velocity.add(.0, 1.0, 0.0)
+                    vehicle.velocity = vehicle.velocity.add(.0, 2.0, 0.0)
                 }
 
                 vehicle.setView(player.position.yaw(), 0f)
