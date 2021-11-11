@@ -53,7 +53,9 @@ object MountHook {
                 }
 
                 vehicle.setView(player.position.yaw(), 0f)
-                vehicle.velocity = vehicle.velocity.add(player.position.direction().normalize().mul(steerPacket.forward.toDouble()).withY(.0))
+                vehicle.velocity = vehicle.velocity
+                    .add(player.position.direction().normalize().mul(steerPacket.forward.toDouble()).withY(.0))
+                    .add(player.position.direction().normalize().rotateAroundY(if (steerPacket.sideways > 0) 90.0 else -90.0).mul(steerPacket.sideways.toDouble()).withY(0.0))
 
             }
         }
