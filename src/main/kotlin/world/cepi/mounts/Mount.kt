@@ -16,14 +16,12 @@ import world.cepi.kstom.item.withMeta
 import world.cepi.mob.mob.Mob
 
 @Serializable
-class Mount(
+data class Mount(
     val speed: Double = 1.0,
-    val jumpHeight: Double = 1.0
+    val jumpHeight: Double = 1.0,
+    val canControl: Boolean = true,
+    val canDismount: Boolean = true
 ) {
-
-    fun withSpeed(speed: Double) = Mount(speed, jumpHeight)
-    fun withJumpHeight(jumpHeight: Double) = Mount(speed, jumpHeight)
-
     companion object {
         const val key = "mount"
     }
@@ -43,6 +41,7 @@ class Mount(
         generatedMob.eventNode.listenOnly<PlayerEntityInteractEvent> {
             MountHook.hookInteract(this, this@Mount)
         }
+
         generatedMob.mob.setTag(Tag.Byte("isMount"), 1)
 
         generatedMob.mob.setInstance(instance, position)

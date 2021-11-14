@@ -21,7 +21,9 @@ object MountCommand : Kommand({
     }
 
     addSubcommands(
-        PropertySubcommand("speed", ArgumentType.Double("speed"), Mount::withSpeed),
-        PropertySubcommand("jumpHeight", ArgumentType.Double("jumpHeight"), Mount::withJumpHeight)
+        PropertySubcommand("speed", ArgumentType.Double("speed")) { copy(speed = it) },
+        PropertySubcommand("jumpHeight", ArgumentType.Double("jumpHeight")) { copy(jumpHeight = it) },
+        PropertySubcommand("canControl", ArgumentType.Boolean("canControl")) { copy(canControl = it)},
+        PropertySubcommand("canDismount", ArgumentType.Boolean("canDismount")) { copy(canDismount = it) }
     )
 }, "mount")

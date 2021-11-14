@@ -49,19 +49,27 @@ object MountHook {
                 val steerPacket = packet as ClientSteerVehiclePacket
                 val vehicle = player.vehicle!!
 
-                if ((steerPacket.flags and 0x02) == 0x02.toByte()) {
+                // 0x02 is the bitflag for dismounting
+                if (mount.canDismount && (steerPacket.flags and 0x02) == 0x02.toByte()) {
                     player.vehicle?.removePassenger(player)
                     return@handler
                 }
 
+                // Can't move the mount if you cant control it
+                if (!mount.canControl) return@handler
+
+                // 0x01 is the bitflag for jumping
                 if (steerPacket.flags and 0x01 == 0x01.toByte() && vehicle.isOnGround) {
                     vehicle.velocity = vehicle.velocity.withY(mount.jumpHeight)
                 }
 
                 vehicle.setView(player.position.yaw(), 0f)
+
                 vehicle.velocity = vehicle.velocity
-                    .add(yawToVec(player.position.yaw()).mul(steerPacket.forward.toDouble()).mul(mount.speed))
-                    .add(yawToVec(player.position.yaw() + (if (steerPacket.sideways > 0) -90 else 90)).mul(abs(steerPacket.sideways.toDouble())).mul(mount.speed))
+                    .add(yawToVec(player.position.yaw()).mul(steerPacket.forward.toDouble())
+                        .mul(mount.speed))
+                    .add(yawToVec(player.position.yaw() + (if (steerPacket.sideways > 0) -90 else 90))
+                        .mul(abs(steerPacket.sideways.toDouble())).mul(mount.speed))
 
             }
         }
