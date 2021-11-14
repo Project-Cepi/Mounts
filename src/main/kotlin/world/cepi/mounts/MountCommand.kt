@@ -14,10 +14,15 @@ import world.cepi.mounts.subcommand.PropertySubcommand
 
 object MountCommand : Kommand({
     val create by literal
+    val forceDismount by literal
 
     syntax(create).onlyPlayers {
         player.itemInMainHand = if (player.mobEgg != null) player.itemInMainHand else Mount().generateEgg()
         player.sendFormattedTranslatableMessage("mount", "create")
+    }
+
+    syntax(forceDismount).onlyPlayers {
+        player.vehicle?.removePassenger(player)
     }
 
     addSubcommands(
