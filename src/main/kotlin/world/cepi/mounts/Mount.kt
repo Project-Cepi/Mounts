@@ -27,11 +27,9 @@ data class Mount(
     }
 
     fun generateEgg(mob: Mob = Mob()) = mob.generateEgg().and {
-        withMeta {
-            this[Tag.Byte("noSpawn")] = 1
+        this[Tag.Byte("noSpawn")] = 1
 
-            this[key] = this@Mount
-        }
+        this[key] = this@Mount
     }
 
 
