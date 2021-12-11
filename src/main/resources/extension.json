@@ -4,6 +4,10 @@
   "version": "${project.version}",
   "dependencies": [
     "KStom",
-    "Kepi"
-  ]
+    "Kepi",
+    "MobExtension"
+  ],
+  "meta": {
+    "downloadURL": "https://github.com/Project-Cepi/Mounts/releases/download/latest/Mounts-1.0.0-all.jar"
+  }
 }

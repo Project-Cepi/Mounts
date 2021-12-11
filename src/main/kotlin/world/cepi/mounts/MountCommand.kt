@@ -2,6 +2,7 @@ package world.cepi.mounts
 
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.tag.Tag
+import world.cepi.kepi.command.subcommand.applyHelp
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.kommand.Kommand
@@ -15,6 +16,16 @@ import world.cepi.mounts.subcommand.PropertySubcommand
 object MountCommand : Kommand({
     val create by literal
     val forceDismount by literal
+
+    applyHelp {
+        """
+            The mount system allows you to create ridable <blue>mobs.
+            
+            To create a mount, hold no item or an item with a mob.
+            
+            You can modify the mob with the various other subcommands.
+        """.trimIndent()
+    }
 
     syntax(create).onlyPlayers {
         player.itemInMainHand = if (player.mobEgg != null) player.itemInMainHand else Mount().generateEgg()
