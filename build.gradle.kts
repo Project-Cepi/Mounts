@@ -44,7 +44,7 @@ dependencies {
     compileOnly("com.github.Minestom:Minestom:fb39fa59f5")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 
     // add mobs
     compileOnly("com.github.Project-Cepi:MobExtension:05a9532b57")
