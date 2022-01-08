@@ -2,21 +2,25 @@ package world.cepi.mounts
 
 import net.minestom.server.extensions.Extension;
 import world.cepi.kstom.event.listenOnly
+import world.cepi.kstom.util.log
+import world.cepi.kstom.util.node
 
 class MountsExtension : Extension() {
 
-    override fun initialize() {
-        eventNode.listenOnly(MountHook::hookUseOnBlock)
-        eventNode.addChild(MountHook.playerVehicleNode)
+    override fun initialize(): LoadStatus {
+        node.listenOnly(MountHook::hookUseOnBlock)
+        node.addChild(MountHook.playerVehicleNode)
         MountCommand.register()
 
-        logger.info("[Mounts] has been enabled!")
+        log.info("[Mounts] has been enabled!")
+
+        return LoadStatus.SUCCESS
     }
 
     override fun terminate() {
         MountCommand.unregister()
 
-        logger.info("[Mounts] has been disabled!")
+        log.info("[Mounts] has been disabled!")
     }
 
 }
