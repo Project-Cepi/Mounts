@@ -28,7 +28,6 @@ object MountHook {
         player.heldMount!!.spawn(player.mobEgg!!, player.instance!!, position)
     }
 
-    // todo if anyone knows trig i havent taken it yet someone please simplify this, or if its geometry i forgot it
     fun yawToVec(yaw: Float) = Vec(cos(Math.toRadians((yaw + 90).toDouble())), 0.0, sin(Math.toRadians((yaw + 90).toDouble())))
 
     fun hookUseOnBlock(event: PlayerUseItemOnBlockEvent) =
