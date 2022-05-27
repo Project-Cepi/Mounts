@@ -50,4 +50,4 @@ data class Mount(
 val Entity.isMount get() = getTag(Tag.Byte("isMount")) == 1.toByte()
 
 val Player.heldMount: Mount?
-    get() = this.itemInMainHand.meta.get(Mount.key)
+    get() = this.itemInMainHand.meta().get(Mount.key)
