@@ -1,15 +1,10 @@
 package world.cepi.mounts
 
 import net.minestom.server.command.builder.arguments.ArgumentType
-import net.minestom.server.tag.Tag
 import world.cepi.kepi.command.subcommand.applyHelp
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.kommand.Kommand
-import world.cepi.kstom.item.and
-import world.cepi.kstom.item.withMeta
-import world.cepi.kstom.item.set
-import world.cepi.mob.mob.Mob
 import world.cepi.mob.mob.mobEgg
 import world.cepi.mounts.subcommand.PropertySubcommand
 
@@ -27,14 +22,14 @@ object MountCommand : Kommand({
         """.trimIndent()
     }
 
-    syntax(create).onlyPlayers {
+    syntax(create) {
         player.itemInMainHand = if (player.mobEgg != null) player.itemInMainHand else Mount().generateEgg()
         player.sendFormattedTranslatableMessage("mount", "create")
-    }
+    }.onlyPlayers()
 
-    syntax(forceDismount).onlyPlayers {
+    syntax(forceDismount) {
         player.vehicle?.removePassenger(player)
-    }
+    }.onlyPlayers()
 
     addSubcommands(
         PropertySubcommand("speed", ArgumentType.Double("speed")) { copy(speed = it) },
